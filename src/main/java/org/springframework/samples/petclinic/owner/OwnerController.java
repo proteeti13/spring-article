@@ -52,9 +52,9 @@ class OwnerController {
     }
 
     @GetMapping("/owners/new")
-    public String initCreationForm(Map<String, Object> model) {
-        Owner owner = new Owner();
-        model.put("owner", owner);
+    public String initCreationForm(Map<String, Object> viewBag) {
+        Owner model = new Owner();
+        viewBag.put("owner", model);
         return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
     }
 
