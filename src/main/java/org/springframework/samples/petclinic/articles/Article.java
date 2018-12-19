@@ -74,4 +74,21 @@ public class Article extends BaseEntity {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+
+
+    @Override
+    public String toString() {
+        return new ToStringCreator(this)
+
+            .append("id", this.getId())
+            .append("title", this.title)
+            .append("description", this.description)
+            .append("author", this.author).toString();
+    }
+
+
+
 }
+
+

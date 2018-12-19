@@ -53,6 +53,8 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
     @Transactional(readOnly = true)
     Owner findById(@Param("id") Integer id);
 
+
+
     /**
      * Save an {@link Owner} to the data store, either inserting or updating it.
      * @param owner the {@link Owner} to save
