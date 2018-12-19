@@ -1,27 +1,19 @@
 package org.springframework.samples.petclinic.articles;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-//import java.nio.ByteBufferAsCharBufferRB;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
+//import java.nio.ByteBufferAsCharBufferRB;
 
 
 @Controller
@@ -60,50 +52,26 @@ class ArticleController {
         }
     }
 
-    @GetMapping("/articles/view")
-    public String viewArticle(Map<String, Object> viewBag) {
+    @GetMapping("/articles/json")
+    @ResponseBody
+    public List<Article>  viewArticle(Map<String, Object> viewBag) {
 
         Iterable<Article> articles = articleRepository.findAll();
+        List<Article> articles1 = new ArrayList<Article>();
 
-        System.out.println(articles);
-        //Todo: json output to task no 3
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(articles);
-        System.out.println(json);
 
-        viewBag.put("articles", articles);
-        return "articles/view";
+        for (Article article:articles) {
+            articles1.add(article);
+        }
+        return articles1;
 
     }
 
+    @GetMapping("/articles/ajax")
+    public String  viewArticlesAjax(Map<String, Object> viewBag) {
 
+        return  "articles/list-ajax";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 }
