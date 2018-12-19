@@ -1,5 +1,9 @@
 package org.springframework.samples.petclinic.articles;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,15 +65,13 @@ class ArticleController {
 
         Iterable<Article> articles = articleRepository.findAll();
 
-//        Article article = this.articles.findById(id);
- //       Optional<Article> results = this.articleRepository.findById(1);
-//        this.articleRepository.findAll();
- //       if(results.isPresent()){
-   //         viewBag.put("article", results);
+        System.out.println(articles);
+        //Todo: json output to task no 3
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(articles);
+        System.out.println(json);
 
-      //  }
         viewBag.put("articles", articles);
-
         return "articles/view";
 
     }
@@ -89,25 +91,6 @@ class ArticleController {
 
 
 
-
-
-
-
-/*    @PostMapping("/articles/new")
-    public String processCreationForm(@Valid Article article, BindingResult result) {
-        if (result.hasErrors()) {
-            return VIEWS_ARTICLE_NEW;
-        } else {
-            this.articleRepository.save(article);
-            return "redirect:/articles/new";
-        }
-    }*/
-
-//    @GetMapping("/articles/new")
-//    public String processFindForm(Map<String, Object> viewBag, ModelMap model) {
-//        //model.put("articles", results);
-//        return "articles/articleList";
-//    }
 
 
 
