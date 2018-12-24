@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="template.html"
+      th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+
+<body>
+
+
+<h2>Science Articles</h2>
+<button class="btn btn-primary" id="btn-load-science-articles">Load Science Articles</button>
+<br>
+<br/>
+
+<div id="add-update-science-article">
+    <input class="sa-id" type="text" readonly placeholder="Id"/>
+    <input class="sa-title" type="text"  placeholder="Title"/>
+    <input class="sa-description" type="text"  placeholder="Description"/>
+    <input class="sa-author" type="text"  placeholder="Author"/>
+    <button class="btn btn-primary" id="btn-add-science-articles">Add Article</button>
+    <button class="btn btn-primary" id="btn-update-science-articles" style="display: none;">Update Article</button>
+</div>
+<br/>
+
+
+<table id="science-articles" class="table table-striped">
+    <thead>
+    <tr>
+        <th style="width: 70px;">Id</th>
+        <th style="width: 200px;">Title</th>
+        <th style="width: 200px">Description</th>
+        <th style="width: 200px">Author</th>
+        <th style="width: 120px">Actions</th>
+    </tr>
+    </thead>
+    <tbody id="science-articles-tbody">
+
+    </tbody>
+</table>
+
+<!--Its will not render on load, later we will use it-->
+<script type="text/template" id="template-add-article">
+    <tr class="single-article">
+        <td class="article-id"></td>
+        <td class="article-title"></td>
+        <td class="article-description"></td>
+        <td class="article-author"></td>
+        <td>
+            <span class="btn glyphicon glyphicon-th-list details"></span>
+            <span class="btn glyphicon glyphicon-pencil edit"></span>
+            <span class="btn glyphicon glyphicon-remove delete"></span>
+        </td>
+    </tr>
+</script>
+
+<th:block layout:fragment="script">
+    <script th:src="@{/resources/js/science-articles.js}"></script>
+</th:block>
+</body>
+</html>
